@@ -3,17 +3,14 @@ const parseStringAsArray = require('../utils/parseStringAsArray');
 
 module.exports = {
   async index(req, res) {
-    // search all devs between 10km
-    // Filter by technology
-
-    const { latitude, longitude, techs } = req.query;
+    const { longitude, latitude, techs } = req.query;
 
     const techsArray = parseStringAsArray(techs);
     //console.log(techsArray);
 
     const devs = await Dev.find({
       techs: {
-        $in: techsArray,
+        $in: techsArray, // Filter by technology
       },
       location: {
         $near: {
@@ -21,7 +18,7 @@ module.exports = {
             type: 'Point',
             coordinates: [longitude, latitude], // sent by the user in the login.
           },
-          $maxDistance: 10000,
+          $maxDistance: 10000, // Search all devs between 10km
         },
       },
     });

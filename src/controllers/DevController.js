@@ -11,17 +11,17 @@ module.exports = {
   },
 
   async store(req, res) {
-    const { github_username, techs, latitude, longitude } = req.body;
+    const { github_username, techs, longitude, latitude  } = req.body;
 
-    // Check if there is a user in tha database with the same 'github_username
+    // Check if there is a user in tha database with the same 'github_username'
     let dev = await Dev.findOne({ github_username });
 
     if (!dev) {
       const response = await axios.get(`https://api.github.com/users/${github_username}`);
-
       //console.log(response.data);
+
       const { name = login, avatar_url, bio } = response.data;
-      console.log(name, avatar_url, bio);
+      //console.log(name, avatar_url, bio);
 
       // Get the full string and turn it into an array with a comma and the space.
       const techsArray = parseStringAsArray(techs);
