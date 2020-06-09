@@ -18,7 +18,7 @@ module.exports = {
             type: 'Point',
             coordinates: [longitude, latitude], // sent by the user in the login.
           },
-          $maxDistance: 10000, // Search all devs between 10km
+          $maxDistance: 10000000000000, // Search all devs between 10km
         },
       },
     });
